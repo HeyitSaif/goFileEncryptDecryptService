@@ -27,11 +27,8 @@ import (
 
 var nonceSize int
 var gcm cipher.AEAD
-var encryptionSting = os.Getenv("MINIO_SECRETKEY")
-
-const MySecret string = "abc&1*~#^2^#s0^=)^^7%b34"
-
-var key = []byte(MySecret)
+var MySecret string
+var key []byte
 
 // var bytes_block, err = aes.NewCipher(key[:16])
 
@@ -79,6 +76,8 @@ func Decrypt(cipherText []byte, MySecret string) ([]byte, error) {
 func UploadFile(c *fiber.Ctx) error {
 	ctx := context.Background()
 	file, err := c.FormFile("fileUpload")
+	MySecret = os.Getenv("SECRET")
+	key = []byte(MySecret)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"error": true,

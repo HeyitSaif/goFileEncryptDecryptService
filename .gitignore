@@ -8,5 +8,5 @@ tmp/
 # Test
 *.out
 
-# Environment variables
-.env
+# # Environment variables
+# .env
